@@ -1,0 +1,30 @@
+# Maven build output
+target/
+
+# Vosk STT model — download separately from https://alphacephei.com/vosk/models
+src/main/resources/model/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Claude Code local config
+.claude/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Spring Boot local overrides
+application-local.properties
+application-local.yml
+
+# Runtime data (stored in ~/.jarvis/ but guard against accidental placement here)
+*.json.bak

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J.A.R.V.I.S. // OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="logo">J.A.R.V.I.S. // OS</span>
+    </div>
+    <nav class="topbar-tabs">
+      <button class="ttab active" data-tab="core">CORE</button>
+      <button class="ttab" data-tab="environment">ENVIRONMENT</button>
+      <button class="ttab" data-tab="analytics">ANALYTICS</button>
+      <button class="ttab" data-tab="comms">COMMS</button>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" title="Settings" id="settings-btn">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="10" cy="10" r="3"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+      <button class="icon-btn notif-btn" title="Notifications">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M10 2a6 6 0 0 1 6 6v3l1.5 2.5H2.5L4 11V8a6 6 0 0 1 6-6z"/>
+          <path d="M8 16a2 2 0 0 0 4 0"/>
+        </svg>
+        <span class="notif-dot"></span>
+      </button>
+      <button class="terminal-btn" id="terminal-toggle">TERMINAL ▶</button>
+    </div>
+  </header>
+
+  <!-- APP SHELL -->
+  <div class="shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-node">
+        <div class="node-dot"></div>
+        <span class="node-label">SYSTEM_NODE_01</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="snav-item active" data-tab="core">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/>
+            <rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/>
+          </svg>
+          <span>Core</span>
+        </button>
+        <button class="snav-item" data-tab="environment">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="1" width="14" height="14" rx="1"/>
+            <path d="M1 6h14M6 6v9"/>
+          </svg>
+          <span>Environment</span>
+        </button>
+        <button class="snav-item" data-tab="analytics">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polyline points="1,12 5,7 9,9 15,3"/>
+            <line x1="1" y1="15" x2="15" y2="15"/>
+          </svg>
+          <span>Analytics</span>
+        </button>
+        <button class="snav-item" data-tab="comms">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4l2 2 2-2h4a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+          </svg>
+          <span>Comms</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="voice-override-btn" id="mic-btn">VOICE_OVERRIDE</button>
+        <div class="sidebar-status">
+          <span class="ss-dot ss-dot--green" id="status-dot"></span>
+          <span class="ss-label" id="status-label">ONLINE</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- ═══════════════════════════════════
+           CORE TAB
+      ════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-core">
+
+        <!-- Stat cards row -->
+        <div class="core-stats-row">
+          <div class="stat-card stat-card--status">
+            <div class="sc-label">SYSTEM_STATUS // 01</div>
+            <div class="sc-online-wrap">
+              <div class="sc-value sc-value--online" id="sys-status">ONLINE</div>
+              <div class="sc-sub">v4.0.2</div>
+            </div>
+            <div class="sc-progress-bar">
+              <div class="sc-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="sc-label">CPU_LOAD // SCTR_09</div>
+            <div class="sc-value" id="cpu-value">24.8%</div>
+            <div class="sc-bars" id="cpu-bars">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="sc-label">MEM_ALLOC // VOL_01</div>
+            <div class="sc-value" id="mem-value">12.2 GB</div>
+            <div class="sc-ring-wrap">
+              <svg class="sc-ring" viewBox="0 0 44 44">
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#0d1f30" stroke-width="4"/>
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#00f2ff" stroke-width="4"
+                  stroke-dasharray="72 41" stroke-dashoffset="9" stroke-linecap="round"
+                  transform="rotate(-90 22 22)" opacity="0.85"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="weather-card">
+            <div class="wc-header">ENV_SCAN // LOCAL</div>
+            <div class="wc-grid">
+              <div class="wc-item">
+                <div class="wc-key">TEMP</div>
+                <div class="wc-val" id="w-temp">—</div>
+              </div>
+              <div class="wc-item">
+                <div class="wc-key">WIND</div>
+                <div class="wc-val" id="w-wind">—</div>
+              </div>
+              <div class="wc-item">
+                <div class="wc-key">HUM</div>
+                <div class="wc-val" id="w-hum">—</div>
+              </div>
+              <div class="wc-item">
+                <div class="wc-key">PRES</div>
+                <div class="wc-val" id="w-pres">—</div>
+              </div>
+            </div>
+            <div class="wc-condition" id="w-condition">◎ SCANNING...</div>
+          </div>
+        </div>
+
+        <!-- Center area: listening + data stream -->
+        <div class="core-center-row">
+
+          <div class="listening-zone">
+            <div class="target-coords" id="target-coords">TARGET_LOCK // X: — // Y: —</div>
+            <div class="orbit orbit--outer"></div>
+            <div class="orbit orbit--mid"></div>
+            <div class="waveform" id="waveform">
+              <div class="wave-bars" id="wave-bars">
+                <span class="bar" style="--d:0s;--h:30px"></span>
+                <span class="bar" style="--d:.1s;--h:50px"></span>
+                <span class="bar" style="--d:.2s;--h:40px"></span>
+                <span class="bar" style="--d:.3s;--h:60px"></span>
+                <span class="bar" style="--d:.15s;--h:45px"></span>
+                <span class="bar" style="--d:.05s;--h:35px"></span>
+                <span class="bar" style="--d:.25s;--h:55px"></span>
+              </div>
+              <div class="wave-label" id="wave-label">STANDBY</div>
+            </div>
+            <div class="voice-level">VOICE_LEVEL // <span id="voice-db">—</span> dBFS</div>
+          </div>
+
+          <div class="datastream-panel">
+            <div class="ds-header">
+              <span>DATA_STREAM // LOG</span>
+              <span class="ds-live-dot"></span>
+            </div>
+            <div class="ds-feed" id="data-stream"></div>
+          </div>
+
+        </div>
+
+        <!-- Bottom input bar -->
+        <div class="input-bar">
+          <span class="input-prompt">▶</span>
+          <input id="text-input" type="text" placeholder="ENTER_COMMAND..." autocomplete="off" spellcheck="false" />
+          <button id="send-btn">EXECUTE</button>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════
+           ENVIRONMENT TAB
+      ════════════════════════════════════ -->
+      <section class="tab-panel hidden" id="tab-environment">
+
+        <div class="env-header-row">
+          <div>
+            <div class="section-title">ATMOSPHERE MANAGEMENT</div>
+            <div class="section-sub">● LIVE_SYSTEM_TELEMETRY // LOCATION: RESIDENCE_A1</div>
+          </div>
+          <div class="env-stat-badge">
+            <span class="env-temp-big">22.4°C</span>
+            <span class="env-optimal-tag">OPTIMAL</span>
+          </div>
+        </div>
+
+        <div class="env-body">
+
+          <div class="env-floorplan-col">
+            <div class="fp-label">● SECTOR_FLOOR_PLAN_01</div>
+            <div class="floorplan-wrap">
+              <svg viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="15" width="280" height="230" stroke="#00f2ff" stroke-width="0.5" opacity="0.3"/>
+                <line x1="20" y1="130" x2="170" y2="130" stroke="#00f2ff" stroke-width="0.5" opacity="0.3"/>
+                <line x1="170" y1="15" x2="170" y2="195" stroke="#00f2ff" stroke-width="0.5" opacity="0.3"/>
+                <line x1="170" y1="195" x2="300" y2="195" stroke="#00f2ff" stroke-width="0.5" opacity="0.3"/>
+                <rect x="40" y="30" width="70" height="50" stroke="#00f2ff" stroke-width="0.4" opacity="0.2" rx="2"/>
+                <rect x="185" y="30" width="80" height="35" stroke="#00f2ff" stroke-width="0.4" opacity="0.2" rx="2"/>
+                <rect x="35" y="150" width="60" height="60" stroke="#00f2ff" stroke-width="0.4" opacity="0.2" rx="2"/>
+                <rect x="185" y="145" width="90" height="35" stroke="#00f2ff" stroke-width="0.4" opacity="0.2" rx="2"/>
+                <circle cx="90" cy="75" r="5" fill="#00f2ff" opacity="0.9"/>
+                <circle cx="90" cy="75" r="12" stroke="#00f2ff" stroke-width="1" opacity="0.3" fill="none"/>
+                <circle cx="90" cy="75" r="20" stroke="#00f2ff" stroke-width="0.5" opacity="0.15" fill="none" stroke-dasharray="3 3"/>
+              </svg>
+            </div>
+            <div class="fp-zoom-btns">
+              <button class="fz-btn">+</button>
+              <button class="fz-btn">−</button>
+              <button class="fz-btn">⊡</button>
+            </div>
+          </div>
+
+          <div class="env-controls-col">
+            <div class="climate-panel">
+              <div class="cp-header">CLIMATE_TUNING <span class="cp-edit">✎</span></div>
+              <div class="cp-slider-row">
+                <div class="csr-label">TARGET_TEMPERATURE</div>
+                <div class="csr-track"><div class="csr-fill" style="width:62%"></div><div class="csr-thumb" style="left:62%"></div></div>
+                <div class="csr-val">22.5°C</div>
+              </div>
+              <div class="cp-slider-row">
+                <div class="csr-label">LUMINANCE_LEVEL</div>
+                <div class="csr-track"><div class="csr-fill" style="width:75%"></div><div class="csr-thumb" style="left:75%"></div></div>
+                <div class="csr-val">75%</div>
+              </div>
+              <div class="cp-slider-row">
+                <div class="csr-label">HUMIDITY_OPTIMIZATION</div>
+                <div class="csr-track"><div class="csr-fill" style="width:40%"></div><div class="csr-thumb" style="left:40%"></div></div>
+                <div class="csr-val">40%</div>
+              </div>
+              <div class="cp-btns">
+                <button class="cp-btn cp-btn--active">ECO_MODE</button>
+                <button class="cp-btn">BOOST</button>
+              </div>
+            </div>
+
+            <div class="cam-panel">
+              <div class="cam-header">● CAM_04 // ENTRY_WAY</div>
+              <div class="cam-feed">
+                <div class="cam-scanlines"></div>
+                <div class="cam-grid">
+                  <div class="cam-crosshair cam-crosshair--tl"></div>
+                  <div class="cam-crosshair cam-crosshair--tr"></div>
+                  <div class="cam-crosshair cam-crosshair--bl"></div>
+                  <div class="cam-crosshair cam-crosshair--br"></div>
+                </div>
+                <div class="cam-overlay">FEED_ENCRYPTED // LIVE_STREAM_ACTIVE</div>
+                <div class="cam-rec-dot">● REC</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="env-bottom-row">
+          <div class="env-chart-card">
+            <div class="ecc-header">AIR_COMPOSITION <span class="ecc-status">OPTIMAL</span></div>
+            <div class="air-bars-wrap">
+              <div class="air-bar-col">
+                <div class="ab-track"><div class="ab-fill ab-fill--cyan" style="height:78%"></div></div>
+                <div class="ab-label">N₂</div>
+                <div class="ab-val">78%</div>
+              </div>
+              <div class="air-bar-col">
+                <div class="ab-track"><div class="ab-fill ab-fill--dim" style="height:21%"></div></div>
+                <div class="ab-label">O₂</div>
+                <div class="ab-val">21%</div>
+              </div>
+              <div class="air-bar-col">
+                <div class="ab-track"><div class="ab-fill ab-fill--red" style="height:4%"></div></div>
+                <div class="ab-label">CO₂</div>
+                <div class="ab-val">0.04%</div>
+              </div>
+              <div class="air-bar-col">
+                <div class="ab-track"><div class="ab-fill ab-fill--cyan" style="height:10%"></div></div>
+                <div class="ab-label">Ar</div>
+                <div class="ab-val">0.93%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="env-chart-card env-chart-card--donut">
+            <div class="ecc-header">POWER_CONSUMPTION</div>
+            <div class="donut-wrap">
+              <svg viewBox="0 0 110 110">
+                <circle cx="55" cy="55" r="40" fill="none" stroke="#0d1f30" stroke-width="10"/>
+                <circle cx="55" cy="55" r="40" fill="none" stroke="#00f2ff" stroke-width="10"
+                  stroke-dasharray="168 83" stroke-dashoffset="42"
+                  stroke-linecap="round" transform="rotate(-90 55 55)" opacity="0.85"/>
+                <text x="55" y="59" text-anchor="middle" fill="#00f2ff" font-size="14" font-weight="600" font-family="Space Grotesk">4.2</text>
+                <text x="55" y="70" text-anchor="middle" fill="#4a7090" font-size="7" font-family="Inter">kW</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="env-chart-card env-chart-card--latency">
+            <div class="ecc-header">NETWORK_LATENCY</div>
+            <div class="lat-row">
+              <span class="lat-key">UP_LINK</span>
+              <div class="lat-bar"><div class="lat-fill" style="width:80%"></div></div>
+              <span class="lat-val">12ms</span>
+            </div>
+            <div class="lat-row">
+              <span class="lat-key">DOWN_LINK</span>
+              <div class="lat-bar"><div class="lat-fill lat-fill--alt" style="width:55%"></div></div>
+              <span class="lat-val">6ms</span>
+            </div>
+            <button class="all-modules-btn">ALL_MODULES_NOMINAL ◎</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════
+           ANALYTICS TAB
+      ════════════════════════════════════ -->
+      <section class="tab-panel hidden" id="tab-analytics">
+
+        <div class="analytics-header">
+          <div>
+            <div class="section-title">INTELLIGENCE_HUB</div>
+            <div class="section-sub">ARRC-ARGX-04 // SCTR-09 OPERATIONAL // SYNC: 100%</div>
+          </div>
+          <div class="tflops-badge">88.4 TFlops</div>
+        </div>
+
+        <div class="analytics-top-row">
+          <div class="chart-panel chart-panel--wide">
+            <div class="anl-panel-header">
+              <span>SCTR-04 // REAL_TIME_MARKET_FLUX</span>
+              <div class="anl-badges">
+                <span class="anl-badge anl-badge--red">-2.4%</span>
+                <span class="anl-badge anl-badge--gray">4h</span>
+                <span class="anl-badge anl-badge--green">+12.4%</span>
+              </div>
+            </div>
+            <canvas id="flux-chart"></canvas>
+          </div>
+
+          <div class="chart-panel chart-panel--gauge">
+            <div class="anl-panel-header">SCTR-07 // NEURAL_LOAD</div>
+            <div class="gauge-wrap">
+              <svg viewBox="0 0 130 130">
+                <circle cx="65" cy="65" r="52" fill="none" stroke="#0d1f30" stroke-width="11"/>
+                <circle cx="65" cy="65" r="52" fill="none" stroke="#00f2ff" stroke-width="11"
+                  stroke-dasharray="246 80" stroke-dashoffset="0"
+                  stroke-linecap="round" transform="rotate(-90 65 65)" opacity="0.85"/>
+                <text x="65" y="70" text-anchor="middle" fill="#00f2ff" font-size="26" font-weight="700" font-family="Space Grotesk">74%</text>
+                <text x="65" y="83" text-anchor="middle" fill="#4a7090" font-size="9" font-family="Inter">NEURAL LOAD</text>
+              </svg>
+            </div>
+            <div class="gauge-stats">
+              <div class="gs-item">
+                <div class="gs-label">INBOUND</div>
+                <div class="gs-val">12.4 GB/s</div>
+              </div>
+              <div class="gs-item">
+                <div class="gs-label">OUTBOUND</div>
+                <div class="gs-val">8.1 GB/s</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-bottom-row">
+          <div class="log-stream-panel">
+            <div class="lsp-header">LOG_STREAM // PRIMARY <span class="lsp-live">● LIVE</span></div>
+            <div class="lsp-feed" id="analytics-log"></div>
+          </div>
+
+          <div class="map-panel">
+            <div class="map-label">SCTR-09 // GLOBAL_MAP_FEED</div>
+            <div class="world-map-wrap" id="world-map">
+              <div class="wm-grid"></div>
+              <div class="map-dot" style="left:20%;top:28%"></div>
+              <div class="map-dot map-dot--active" style="left:47%;top:22%"></div>
+              <div class="map-dot" style="left:63%;top:38%"></div>
+              <div class="map-dot map-dot--active" style="left:74%;top:52%"></div>
+              <div class="map-dot" style="left:30%;top:60%"></div>
+              <div class="map-line" style="left:20%;top:28%;width:27%;transform:rotate(8deg)"></div>
+              <div class="map-line" style="left:47%;top:22%;width:17%;transform:rotate(20deg)"></div>
+            </div>
+          </div>
+
+          <div class="asset-panel">
+            <div class="asset-item">
+              <div>
+                <div class="ai-label">ASSET CLUSTER ALPHA</div>
+                <div class="ai-sub">7-ARCS-S07</div>
+              </div>
+              <span class="ai-trend ai-trend--up">↗</span>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="ai-label">PRODUCTIVITY INDEX</div>
+                <div class="ai-sub">5-ARCS-P01</div>
+              </div>
+              <span class="ai-trend ai-trend--up">↗</span>
+            </div>
+            <div class="asset-item">
+              <div>
+                <div class="ai-label">ENERGY USAGE</div>
+                <div class="ai-sub">LOW UTILIZATION</div>
+              </div>
+              <span class="ai-trend ai-trend--down">↓</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-stats-row">
+          <div class="ast-card">
+            <div class="ast-label">UPTIME</div>
+            <div class="ast-val" id="uptime-val">—</div>
+          </div>
+          <div class="ast-card">
+            <div class="ast-label">TOTAL_PROCESSED</div>
+            <div class="ast-val">1.82 PB</div>
+          </div>
+          <div class="ast-card">
+            <div class="ast-label">SYSTEM_HEALTH</div>
+            <div class="ast-val ast-val--green">OPTIMAL</div>
+          </div>
+          <div class="ast-card">
+            <div class="ast-label">AVAILABILITY</div>
+            <div class="ast-val">99.9%</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════
+           COMMS TAB
+      ════════════════════════════════════ -->
+      <section class="tab-panel hidden" id="tab-comms">
+
+        <div class="comms-header">
+          <div>
+            <div class="section-title">COMMUNICATION_MATRIX</div>
+            <div class="section-sub">LINK_SECURED // ENCRYPTION_LEVEL: OMEGA</div>
+          </div>
+          <div class="comms-latency-badge">
+            <div class="clb-label">NETWORK_LATENCY</div>
+            <div class="clb-val">14ms <span class="clb-unit">SYNC</span></div>
+          </div>
+        </div>
+
+        <div class="comms-body">
+
+          <div class="alerts-col">
+            <div class="alerts-header">⚠ Priority Alerts</div>
+
+            <div class="alert-card alert-card--critical">
+              <div class="acr-top">
+                <span class="alert-badge badge--critical">CRITICAL</span>
+                <span class="alert-time">02:14:32</span>
+              </div>
+              <div class="alert-title">Atmospheric Breach Detected</div>
+              <div class="alert-desc">Sector 7-8 containment failing. Manual override required immediately.</div>
+            </div>
+
+            <div class="alert-card alert-card--high">
+              <div class="acr-top">
+                <span class="alert-badge badge--high">HIGH</span>
+                <span class="alert-time">02:15:07</span>
+              </div>
+              <div class="alert-title">Core Temperature Spike</div>
+              <div class="alert-desc">Sub-system 04 reporting 12% increase beyond baseline thresholds.</div>
+            </div>
+
+            <div class="alert-card alert-card--standard">
+              <div class="acr-top">
+                <span class="alert-badge badge--standard">STANDARD</span>
+                <span class="alert-time">02:09:44</span>
+              </div>
+              <div class="alert-title">Satellite Handover Complete</div>
+              <div class="alert-desc">Relay switched from KJ-8 to Vesper-Core without data loss.</div>
+            </div>
+          </div>
+
+          <div class="transmission-col">
+            <div class="trans-header">■ INCOMING_TRANSMISSION</div>
+            <div class="trans-card">
+              <div class="trans-avatar">
+                <div class="ta-ring"></div>
+                <div class="ta-inner">CR</div>
+              </div>
+              <div class="trans-info">
+                <div class="trans-name">COMMANDER_REYES</div>
+                <div class="trans-msg">"Visual link established. Deploying strategic assets to Sector 4. Awaiting confirmation of orbital alignment before primary engagement."</div>
+                <div class="trans-actions">
+                  <button class="ta-btn ta-btn--accept">▶ ACCEPT_SIGNAL</button>
+                  <button class="ta-btn ta-btn--terminate">⊗ TERMINATE</button>
+                </div>
+              </div>
+            </div>
+            <div class="trans-subs">
+              <div class="tsub-card">
+                <div class="tsub-avatar">LC</div>
+                <div class="tsub-body">
+                  <div class="tsub-name">LOGISTICS_CORE <span class="tsub-time">7 MINS AGO</span></div>
+                  <div class="tsub-msg">"Fuel cell depletion in Sector 9. Automated drone dispatching in 4 minutes."</div>
+                </div>
+              </div>
+              <div class="tsub-card">
+                <div class="tsub-avatar tsub-avatar--alt">DE</div>
+                <div class="tsub-body">
+                  <div class="tsub-name">DR. ELARA <span class="tsub-time">JUST NOW</span></div>
+                  <div class="tsub-msg">"Anomalous signal detected in the deep space band. Requesting sensor time."</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="links-col">
+            <div class="links-header">⚡ Active Links</div>
+
+            <div class="link-item">
+              <div class="li-dot li-dot--green"></div>
+              <span class="li-name">ORBITAL_STATION_04</span>
+              <div class="li-bar"><div class="li-fill" style="width:88%"></div></div>
+              <span class="li-pct">88%</span>
+            </div>
+            <div class="link-item">
+              <div class="li-dot li-dot--yellow"></div>
+              <span class="li-name">DEEP_CORE_RELAY</span>
+              <div class="li-bar"><div class="li-fill li-fill--yellow" style="width:55%"></div></div>
+              <span class="li-pct">55%</span>
+            </div>
+            <div class="link-item">
+              <div class="li-dot li-dot--red"></div>
+              <span class="li-name">SURFACE_ARRAY_B</span>
+              <div class="li-bar"><div class="li-fill li-fill--red" style="width:0%"></div></div>
+              <span class="li-pct li-pct--offline">OFFLINE</span>
+            </div>
+
+            <div class="comms-net-stats">
+              <div class="cns-item">
+                <div class="cns-label">SIGNAL_NODES</div>
+                <div class="cns-val">1,402</div>
+              </div>
+              <div class="cns-item">
+                <div class="cns-label">ERR_RATE</div>
+                <div class="cns-val">0.04%</div>
+              </div>
+              <div class="cns-item">
+                <div class="cns-label">THROUGHPUT</div>
+                <div class="cns-val">8.2 GB/s</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- TERMINAL OVERLAY -->
+  <div class="terminal-overlay hidden" id="terminal">
+    <div class="term-titlebar">
+      <span>TERMINAL // J.A.R.V.I.S. INTERFACE</span>
+      <button id="close-terminal">✕</button>
+    </div>
+    <div class="term-body" id="term-body"></div>
+    <div class="term-input-row">
+      <span class="term-prompt">JARVIS&gt;</span>
+      <input id="term-input" type="text" autocomplete="off" spellcheck="false" placeholder="Enter command..." />
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
