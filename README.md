@@ -21,6 +21,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.5-00f2ff?style=for-the-badge&logo=springboot&logoColor=white&labelColor=0a0e14)
 ![License](https://img.shields.io/badge/license-MIT-00f2ff?style=for-the-badge&labelColor=0a0e14)
 ![Status](https://img.shields.io/badge/status-ONLINE-00ff88?style=for-the-badge&labelColor=0a0e14)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-abeeeerr.github.io%2Fjarvis-00f2ff?style=for-the-badge&labelColor=0a0e14)](https://abeeeerr.github.io/jarvis)
 
 <br/>
 
@@ -30,24 +31,6 @@
 <br/>
 
 </div>
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-| Core Dashboard | Analytics |
-|:-:|:-:|
-| ![Core](./screenshots/core.png) | ![Analytics](./screenshots/analytics.png) |
-
-| Environment | Comms |
-|:-:|:-:|
-| ![Environment](./screenshots/environment.png) | ![Comms](./screenshots/comms.png) |
-
-</div>
-
-> **To add screenshots:** Run the app, open `http://localhost:8080` in Chrome, take screenshots of each tab, and drop them into the `screenshots/` folder as `core.png`, `analytics.png`, `environment.png`, `comms.png`.
 
 ---
 
